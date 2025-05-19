@@ -14,6 +14,9 @@ type
     classNum*: int
     classLet*: string
 
+
+proc `$`*(p: Person): string = p.firstname & " " & p.lastname
+
 proc newDirector*(firstname: string = "", lastname: string = "",
                 birthDate: int64 = 0): Director =
   Director(
@@ -21,8 +24,6 @@ proc newDirector*(firstname: string = "", lastname: string = "",
     lastname: lastname,
     birthDate: birthDate
   )
-
-proc `$`*(p: Person): string = p.firstname & " " & p.lastname
 
 proc newTeacher*(firstname: string = "", lastname: string = "",
                 birthDate: int64 = 0, subject: Subjects = NONE): Teacher =

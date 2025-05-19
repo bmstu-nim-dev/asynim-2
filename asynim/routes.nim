@@ -1,4 +1,5 @@
 import school/routes
+## Импортируйте роуты остальных подпроектов
 import views
 
 template baseRoutes*() =
