@@ -1,0 +1,38 @@
+<div align="center">
+<form id="form" action="{{ action }}" method="post">
+  {{ inputs }}
+  <button type="submit" class="btn btn-warning">Отправить</button>
+</form>
+</div>
+<script>
+    for (var input of document.getElementsByTagName('input')) {
+        input.setAttribute('required', 'required');
+    }
+    input = document.getElementsByClassName('date')[0];
+    input.setAttribute('type', 'date');
+    input.setAttribute('value', '2005-03-18');
+    input = document.getElementsByClassName('num')[0];
+    input.setAttribute('type', 'number');
+    input.setAttribute('max', '11');
+    input.setAttribute('min', '1');
+</script>
+<script>
+document.getElementById("form").addEventListener("submit", async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const formData = new FormData(form);
+  const jsonData = {};
+  formData.forEach((value, key) => {
+    jsonData[key] = value;
+  });
+  const response = await fetch("{{ action }}", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(jsonData)
+  });
+  const result = await response.json();
+  if (result.status === "OK") {
+    alert("Данные успешно отправлены!");
+  }
+});
+</script>
